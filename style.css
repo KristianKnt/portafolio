@@ -212,6 +212,13 @@ main p {
   font-size: var(--text-lg);
 }
 
+.site-intro {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
 /* Navegación */
 .site-nav {
   display: flex;
@@ -390,6 +397,10 @@ main p {
   flex-direction: column;
   gap: var(--space-1);
   align-items: flex-start;
+}
+
+.contact-intro {
+  margin-bottom: var(--space-2);
 }
 
 .contact-links a {
