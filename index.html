@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--
+  PORTAFOLIO — Backend Developer Junior
+  Archivo: index.html
+  Estructura: HTML5 semántico, sin dependencias, accesible (WCAG 2.2 AA).
+  Convención: los textos marcados con [EDITAR] son marcadores para que los reemplaces.
+-->
+<html lang="es">
+<head>
+  <!-- Codificación y viewport: necesarios para texto correcto y diseño responsive -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Título y descripción: aparecen en la pestaña del navegador y en buscadores -->
+  <title>[EDITAR: Tu Nombre] | Backend Developer Junior</title>
+  <meta name="description" content="Portafolio de [EDITAR: Tu Nombre], desarrollador backend junior en formación. Construyendo APIs funcionales con código limpio.">
+
+  <!-- Indica que la página admite tema claro y oscuro (útil cuando agregues CSS) -->
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Hoja de estilos externa (se completará en el siguiente paso) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!--
+    ENLACE DE SALTO (WCAG 2.4.1 – Evitar bloques):
+    Permite a usuarios de teclado y lectores de pantalla ir directo al contenido.
+    Se mostrará al recibir foco cuando lo estilices con CSS.
+  -->
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <!-- ============================================================
+       ENCABEZADO: nombre y rol
+       ============================================================ -->
+  <header class="site-header">
+    <!-- Único <h1> de la página: identifica al autor -->
+    <h1 class="site-title">[EDITAR: Tu Nombre]</h1>
+    <p class="site-role">Backend Developer Junior</p>
+
+    <!-- Navegación interna. aria-label distingue este <nav> de otros posibles -->
+    <nav aria-label="Secciones del portafolio">
+      <ul class="site-nav">
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#habilidades">Habilidades técnicas</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       CONTENIDO PRINCIPAL (un solo <main> por página)
+       ============================================================ -->
+  <main id="contenido" tabindex="-1">
+
+    <!-- ---------- SOBRE MÍ ---------- -->
+    <!-- aria-labelledby asocia la sección con su título para lectores de pantalla -->
+    <section id="sobre-mi" aria-labelledby="titulo-sobre-mi">
+      <h2 id="titulo-sobre-mi">Sobre mí</h2>
+      <p>
+        Actualmente curso un bootcamp de desarrollo backend, donde estoy aprendiendo
+        a diseñar y construir APIs funcionales. Me motiva escribir código limpio,
+        legible y fácil de mantener, y busco mi primera oportunidad profesional para
+        seguir creciendo en un equipo.
+      </p>
+    </section>
+
+    <!-- ---------- HABILIDADES TÉCNICAS ---------- -->
+    <section id="habilidades" aria-labelledby="titulo-habilidades">
+      <h2 id="titulo-habilidades">Habilidades técnicas</h2>
+
+      <!-- Cada categoría es un grupo con su propio h3 y una lista -->
+      <!-- [EDITAR] Ajusta cada lista a lo que realmente estás aprendiendo -->
+      <div class="skills">
+
+        <div class="skill-group">
+          <h3>Lenguajes</h3>
+          <ul>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>HTML y CSS</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3>Bases de datos</h3>
+          <ul>
+            <li>SQL</li>
+            <li>PostgreSQL</li>
+            <li>MongoDB</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3>Herramientas</h3>
+          <ul>
+            <li>Git y GitHub</li>
+            <li>Postman</li>
+            <li>Linux (terminal)</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------- PROYECTOS ---------- -->
+    <section id="proyectos" aria-labelledby="titulo-proyectos">
+      <h2 id="titulo-proyectos">Proyectos</h2>
+      <p>Mis primeros proyectos están en camino. Aquí aparecerán mis repositorios de GitHub.</p>
+
+      <!--
+        LISTA DE PROYECTOS:
+        Cada proyecto es un <li> con un <article>. Para agregar uno nuevo,
+        copia la PLANTILLA que está comentada al final de esta lista.
+      -->
+      <ul class="project-list">
+
+        <!-- Tarjeta destacada: proyecto del bootcamp (en proceso) -->
+        <li class="project-item--featured">
+          <article class="project-card project-card--featured" aria-labelledby="proyecto-1-titulo">
+
+            <header class="project-header">
+              <h3 id="proyecto-1-titulo">[EDITAR: Nombre del proyecto] — API del bootcamp</h3>
+              <!-- El estado se comunica con TEXTO, no solo con color (WCAG 1.4.1) -->
+              <p class="project-status">Estado: En proceso</p>
+            </header>
+
+            <!-- Tu rol dentro del proyecto -->
+            <p class="project-role">Rol: Desarrollador Backend</p>
+
+            <!-- [EDITAR] Explica en 2-3 frases de qué trata el proyecto -->
+            <p class="project-description">
+              API REST desarrollada durante mi bootcamp para gestionar
+              [EDITAR: el dominio del proyecto, p. ej. usuarios, productos y pedidos].
+              Me enfoco en construir una base sólida y escalable, siguiendo buenas
+              prácticas desde el inicio.
+            </p>
+
+            <!-- Puntos a resaltar -->
+            <h4 class="project-subtitle">En lo que estoy trabajando</h4>
+            <ul class="project-highlights">
+              <li>
+                <strong>Arquitectura RESTful:</strong>
+                rutas claras, verbos HTTP correctos y códigos de estado coherentes.
+              </li>
+              <li>
+                <strong>Diseño de base de datos:</strong>
+                modelado de entidades, relaciones y consultas eficientes.
+              </li>
+              <li>
+                <strong>Módulos de autenticación:</strong>
+                registro, inicio de sesión y protección de rutas.
+              </li>
+            </ul>
+
+            <!-- [EDITAR] Tecnologías reales de tu proyecto -->
+            <ul class="project-tags" aria-label="Tecnologías del proyecto">
+              <li>JavaScript</li>
+              <li>Node.js</li>
+              <li>PostgreSQL</li>
+              <li>JWT</li>
+            </ul>
+
+            <!--
+              Botón al repositorio. Aunque el proyecto esté en desarrollo, el enlace
+              ya funciona. [EDITAR] Reemplaza la URL por la de tu repositorio.
+            -->
+            <p class="project-links">
+              <a href="https://github.com/TU-USUARIO/NOMBRE-REPO" target="_blank" rel="noopener noreferrer">
+                Ver repositorio en GitHub
+                <span class="visually-hidden">(se abre en una pestaña nueva)</span>
+              </a>
+            </p>
+          </article>
+        </li>
+
+        <!--
+        ===== PLANTILLA PARA UN NUEVO PROYECTO (copia y pega) =====
+        <li>
+          <article class="project-card" aria-labelledby="proyecto-N-titulo">
+            <h3 id="proyecto-N-titulo">Nombre del proyecto</h3>
+            <p class="project-status">Estado: Completado</p>
+            <p class="project-description">Qué hace y qué problema resuelve.</p>
+            <ul class="project-tags" aria-label="Tecnologías usadas">
+              <li>Node.js</li>
+              <li>PostgreSQL</li>
+            </ul>
+            <p class="project-links">
+              <a href="https://github.com/TU-USUARIO/NOMBRE-REPO">Ver código de Nombre del proyecto en GitHub</a>
+            </p>
+          </article>
+        </li>
+        ============================================================
+        -->
+
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       PIE DE PÁGINA: contacto
+       ============================================================ -->
+  <footer id="contacto" class="site-footer">
+    <h2 id="titulo-contacto">Contacto</h2>
+
+    <nav aria-labelledby="titulo-contacto">
+      <ul class="contact-links">
+        <!--
+          Los enlaces externos abren en pestaña nueva con rel="noopener noreferrer"
+          (seguridad). El texto visible avisa del comportamiento (WCAG 3.2.5).
+          [EDITAR] Reemplaza TU-USUARIO, TU-PERFIL y el correo.
+        -->
+        <li>
+          <a href="https://github.com/TU-USUARIO" target="_blank" rel="noopener noreferrer">
+            GitHub <span class="visually-hidden">(se abre en una pestaña nueva)</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/TU-PERFIL" target="_blank" rel="noopener noreferrer">
+            LinkedIn <span class="visually-hidden">(se abre en una pestaña nueva)</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:tu-correo@ejemplo.com">Correo electrónico: tu-correo@ejemplo.com</a>
+        </li>
+      </ul>
+    </nav>
+
+    <p class="copyright">&copy; 2026 [EDITAR: Tu Nombre]</p>
+  </footer>
+
+</body>
+</html>
