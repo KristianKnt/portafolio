@@ -1,6 +1,6 @@
 /**
- * Portfolio interactions and Grid renderer.
- * The canvas loop intentionally does a bounded amount of work per frame.
+ * Interacciones del portafolio y renderizador de The Grid.
+ * La inicialización espera al DOM para que el canvas tenga dimensiones válidas.
  */
 document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!canvas || !context) return;
 
+  // Estado mutable de la animación; evita crear estructuras nuevas por frame.
   const state = {
     width: 0,
     height: 0,
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })),
   };
 
+  // Ajusta la resolución física sin saturar memoria en pantallas retina.
   const resizeCanvas = () => {
     state.pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
     state.width = window.innerWidth;
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     context.setTransform(state.pixelRatio, 0, 0, state.pixelRatio, 0, 0);
   };
 
+  // Debounce: varios eventos resize terminan en una sola medición y redibujado.
   const requestResize = () => {
     window.clearTimeout(state.resizeTimer);
     state.resizeTimer = window.setTimeout(() => {
@@ -45,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 120);
   };
 
+  // Perspectiva de The Grid. Los límites fijos garantizan que nunca haya un bucle infinito.
   const drawGrid = () => {
     const { width, height } = state;
     const horizon = height * 0.61;
@@ -74,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // Estelas neon cian/naranja: dos trazos ligeros sustituyen gradientes por frame.
   const drawTrails = (delta) => {
     const { width, height, trails } = state;
 
@@ -108,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  // Único ciclo continuo: cada llamada agenda como máximo un siguiente frame.
   const draw = (time) => {
     const delta = Math.min(time - state.lastTime || 16.67, 50);
     state.lastTime = time;
@@ -123,11 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
   draw(0);
   window.addEventListener('resize', requestResize, { passive: true });
 
+  // El preloader se cierra cuando todos los recursos de la página están listos.
   const preloader = document.querySelector('.preloader');
   window.addEventListener('load', () => {
     window.setTimeout(() => preloader?.classList.add('done'), 800);
   }, { once: true });
 
+  // Decodificación de títulos al entrar en viewport, sin cambiar su texto final.
   const decode = (element) => {
     if (!element.classList.contains('decode') || reduceMotion || element.dataset.decoded) return;
     element.dataset.decoded = 'true';
@@ -158,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.14 });
   document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
+  // Menú responsive y navegación activa por sección.
   const nav = document.querySelector('.main-nav');
   const menu = document.querySelector('.menu-toggle');
   menu?.addEventListener('click', () => {
@@ -178,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }), { rootMargin: '-35% 0px -55% 0px' });
   document.querySelectorAll('main section').forEach((section) => sectionObserver.observe(section));
 
+  // Retículo del cursor: sigue al puntero con interpolación para una estela suave.
   const dot = document.querySelector('.cursor-dot');
   const ring = document.querySelector('.cursor-ring');
   let mouseX = 0;
@@ -203,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     element.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
   });
 
+  // Sustituir este feedback local por fetch/Formspree/tu endpoint cuando tengas backend.
   document.querySelector('#contact-form')?.addEventListener('submit', (event) => {
     event.preventDefault();
     const feedback = event.currentTarget.querySelector('.form-feedback');
