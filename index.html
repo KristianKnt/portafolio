@@ -1,235 +1,215 @@
-<!DOCTYPE html>
-<!--
-  PORTAFOLIO — Cristian Camilo Rojas Capera
-  Archivo: index.html
-  Estructura: HTML5 semántico, sin dependencias, accesible (WCAG 2.2 AA).
-  
--->
+<!doctype html>
+<!-- Portafolio interactivo: los textos, enlaces y proyectos son editables. -->
 <html lang="es">
+
 <head>
-  <!-- Codificación y viewport: necesarios para texto correcto y diseño responsive -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Título y descripción: aparecen en la pestaña del navegador y en buscadores -->
-  <title>Cristian Camilo Rojas Capera | Backend Developer Junior</title>
-  <meta name="description" content="Portafolio de Cristian Camilo Rojas Capera, desarrollador backend junior en formación. Construyendo APIs funcionales con código limpio.">
-
-  <!-- Indica que la página admite tema claro y oscuro (útil cuando agregues CSS) -->
-  <meta name="color-scheme" content="light dark">
-
-  <!-- Hoja de estilos externa (se completará en el siguiente paso) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#02060d">
+  <meta name="description" content="Portafolio de Cristian Camilo Rojas Capera — backend developer en formación.">
+  <title>CR // Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-  <!--
-    ENLACE DE SALTO (WCAG 2.4.1 – Evitar bloques):
-    Permite a usuarios de teclado y lectores de pantalla ir directo al contenido.
-    Se mostrará al recibir foco cuando lo estilices con CSS.
-  -->
-  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-
-  <!-- ============================================================
-       ENCABEZADO: nombre y rol
-       ============================================================ -->
-  <header class="site-header">
-    <!-- Único <h1> de la página: identifica al autor -->
-    <h1 class="site-title">Cristian Camilo Rojas Capera</h1>
-    <p class="site-role">Desarrollador backend junior · Java y Spring Boot</p>
-    <p class="site-intro">Construyo soluciones backend con enfoque en APIs, datos y código mantenible. Actualmente fortalezco mi formación en Java y Spring Boot mediante un bootcamp.</p>
-
-    <!-- Navegación interna. aria-label distingue este <nav> de otros posibles -->
-    <nav aria-label="Secciones del portafolio">
-      <ul class="site-nav">
-        <li><a href="#sobre-mi">Sobre mí</a></li>
-        <li><a href="#habilidades">Habilidades técnicas</a></li>
-        <li><a href="#proyectos">Proyectos</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
+  <!-- Pantalla inicial con Identity Disc; script.js la oculta después de cargar. -->
+  <div class="preloader" aria-label="Cargando sistema">
+    <div class="disc-loader"><span></span></div>
+    <p>INITIALIZING SYSTEM<span class="loading-dots">...</span></p><small>ACCESS GRANTED // 2026</small>
+  </div>
+  <!-- Canvas de The Grid: dibuja la perspectiva y las estelas de luz. -->
+  <canvas id="grid-canvas" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <!-- Navegación fija; sus href deben coincidir con los id de las secciones. -->
+  <header class="topbar"><a class="brand" href="#inicio" aria-label="Ir al inicio"><svg class="brand-mark"
+        viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 2 36 11v18L20 38 4 29V11L20 2Z" />
+        <path d="m20 9 10 5.7v10.6L20 31l-10-5.7V14.7L20 9Z" />
+        <path d="M20 9v22M10 14.7l20 10.6M30 14.7 10 25.3" />
+      </svg><span>CR<span class="brand-slash">//</span></span></a><button class="menu-toggle" type="button"
+      aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+    <nav class="main-nav" aria-label="Navegación principal"><a class="nav-link active" href="#inicio"><span>01.</span>
+        INICIO</a><a class="nav-link" href="#proyectos"><span>02.</span> PROYECTOS</a><a class="nav-link"
+        href="#habilidades"><span>03.</span> HABILIDADES</a><a class="nav-link" href="#contacto"><span>04.</span>
+        TRANSMISIÓN</a></nav>
+    <div class="system-status"><i></i> ONLINE</div>
   </header>
-
-  <!-- ============================================================
-       CONTENIDO PRINCIPAL (un solo <main> por página)
-       ============================================================ -->
-  <main id="contenido" tabindex="-1">
-
-    <!-- ---------- SOBRE MÍ ---------- -->
-    <!-- aria-labelledby asocia la sección con su título para lectores de pantalla -->
-    <section id="sobre-mi" aria-labelledby="titulo-sobre-mi">
-      <h2 id="titulo-sobre-mi">Sobre mí</h2>
-      <p>
-        Soy desarrollador de software con experiencia en desarrollo backend, integración de APIs y gestión de bases de datos. He trabajado con Python, Odoo y PHP en soluciones orientadas a las necesidades del negocio.
-        Actualmente estoy fortaleciendo mis conocimientos en Java y Spring Boot, con énfasis en el diseño y la construcción de APIs REST, la arquitectura por capas y las buenas prácticas de desarrollo. Me interesa escribir código claro, mantenible y útil para el producto.
-        Me caracterizo por mi capacidad de aprendizaje, pensamiento analítico y compromiso con la calidad del software.
-      </p>
+  <main>
+    <!-- Hero: identidad visual, propuesta de valor y llamada a proyectos. -->
+    <section id="inicio" class="hero section-shell">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="eyebrow-line"></span> IDENTIDAD // CR-001</p>
+        <h1><span class="muted-heading">CREANDO</span><br><span class="glow-text decode"
+            data-text="SISTEMAS DIGITALES">SISTEMAS DIGITALES</span></h1>
+        <p class="hero-subtitle"><span class="prompt">&gt;_</span> Backend developer junior traduciendo problemas
+          complejos en código limpio, APIs funcionales y experiencias que conectan.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#proyectos"><span>EXPLORAR
+              PROYECTOS</span><b>↗</b></a><a class="text-link" href="#sobre-mi">LEER PERFIL <span>↓</span></a></div>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
+        <div class="hero-disc">
+          <div class="disc-core"></div><span>CR</span>
+        </div>
+        <div class="orbit-label label-top">BUILD / DEPLOY</div>
+        <div class="orbit-label label-bottom">JAVA · API · DATA</div>
+      </div>
+      <div class="scroll-cue"><span class="scroll-line"></span> SCROLL TO ENTER THE GRID</div>
     </section>
-
-    <!-- ---------- HABILIDADES TÉCNICAS ---------- -->
-    <section id="habilidades" aria-labelledby="titulo-habilidades">
-      <h2 id="titulo-habilidades">Habilidades técnicas</h2>
-
-      <!-- Cada categoría es un grupo con su propio h3 y una lista -->
-      
-      <div class="skills">
-
-        <div class="skill-group">
-          <h3>Lenguajes</h3>
-          <ul>
-            <li>JavaScript</li>
-            <li>Python</li>
-            <li>Java</li>
-            <li>PHP</li>
-          </ul>
+    <!-- Perfil: reemplaza nombre, ubicación, rol, biografía y porcentajes. -->
+    <section id="sobre-mi" class="profile section-shell section-pad">
+      <div class="section-heading reveal">
+        <p class="section-index">01 / PROFILE</p>
+        <h2 class="decode" data-text="USER PROFILE">USER PROFILE</h2>
+      </div>
+      <div class="profile-grid">
+        <div class="profile-card glass-panel reveal">
+          <div class="card-corner card-corner-tl"></div>
+          <div class="card-corner card-corner-br"></div>
+          <div class="profile-card-head"><span class="status-chip"><i></i> ACTIVE USER</span><span
+              class="profile-id">ID: CR-001</span></div>
+          <div class="profile-main">
+            <div class="avatar">CR<span></span></div>
+            <div>
+              <h3>CRISTIAN CAMILO<br>ROJAS CAPERA</h3>
+              <p>BACKEND DEVELOPER // JUNIOR</p>
+            </div>
+          </div>
+          <p class="profile-bio">Desarrollador de software en formación, enfocado en construir soluciones backend
+            sólidas. Me muevo entre la lógica del negocio, los datos y el código mantenible.</p>
+          <div class="profile-meta"><span>LOC <b>BOGOTÁ, CO</b></span><span>AVAILABILITY <b class="cyan">OPEN TO
+                WORK</b></span></div>
         </div>
-
-        <div class="skill-group">
-          <h3>Bases de datos</h3>
-          <ul>
-            <li>SQL</li>
-            <li>PostgreSQL</li>
-            <li>MongoDB</li>
-          </ul>
+        <div class="stats-panel reveal">
+          <p class="micro-label">// SYSTEM CAPABILITIES</p>
+          <div class="stat">
+            <div><span>PROBLEM SOLVING</span><b>88%</b></div>
+            <div class="progress"><i style="--value:88%"></i></div>
+          </div>
+          <div class="stat">
+            <div><span>LEARNING VELOCITY</span><b>94%</b></div>
+            <div class="progress"><i style="--value:94%"></i></div>
+          </div>
+          <div class="stat">
+            <div><span>CODE QUALITY</span><b>82%</b></div>
+            <div class="progress"><i style="--value:82%"></i></div>
+          </div>
+          <div class="quote">“El código es una conversación entre el problema y la solución.”</div>
         </div>
-
-        <div class="skill-group">
-          <h3>Herramientas</h3>
-          <ul>
-            <li>Git y GitHub</li>
-            <li>Postman</li>
-            <li>Linux (terminal)</li>
-          </ul>
-        </div>
-
       </div>
     </section>
-
-    <!-- ---------- PROYECTOS ---------- -->
-    <section id="proyectos" aria-labelledby="titulo-proyectos">
-      <h2 id="titulo-proyectos">Proyectos</h2>
-      <p>Estoy construyendo mis primeros proyectos personales y colaborativos durante el bootcamp. Compartiré aquí cada proyecto cuando tenga un objetivo claro, una explicación breve y un enlace funcional.</p>
-
-      <!--
-        LISTA DE PROYECTOS:
-        Cada proyecto es un <li> con un <article>. Para agregar uno nuevo,
-        copia la PLANTILLA que está comentada al final de esta lista.
-      -->
-      <ul class="project-list">
-
-        <!-- Tarjeta destacada: proyecto del bootcamp (en proceso) -->
-        <li class="project-item--featured">
-          <article class="project-card project-card--featured" aria-labelledby="proyecto-1-titulo">
-
-            <header class="project-header">
-              <h3 id="proyecto-1-titulo">Planeador</h3>
-              <!-- El estado se comunica con TEXTO, no solo con color (WCAG 1.4.1) -->
-              <p class="project-status">Estado: En proceso</p>
-            </header>
-
-            <!-- Tu rol dentro del proyecto -->
-            <p class="project-role">Rol: Desarrollador Backend</p>
-
-            <!-- [EDITAR] Explica en 2-3 frases de qué trata el proyecto -->
-            <p class="project-description">
-              Aplicación web para gestionar y organizar tareas: permite crearlas, asignar responsables, establecer fechas y actualizar su estado. Implementé una estructura modular con JavaScript ES6+, separación de responsabilidades y validaciones del lado del cliente, utilizando HTML, CSS y Bootstrap 5.3.3.
-            </p>
-
-            <!-- Puntos a resaltar -->
-            <!-- <h4 class="project-subtitle">En lo que estoy trabajando</h4>
-            <ul class="project-highlights"> -->
-              <!-- <li>
-                <strong>Arquitectura RESTful:</strong>
-                rutas claras, verbos HTTP correctos y códigos de estado coherentes.
-              </li>
-              <li>
-                <strong>Diseño de base de datos:</strong>
-                modelado de entidades, relaciones y consultas eficientes.
-              </li>
-              <li>
-                <strong>Módulos de autenticación:</strong>
-                registro, inicio de sesión y protección de rutas.
-              </li>
-            </ul> -->
-
-            <!--  Tecnologías reales de tu proyecto -->
-            <ul class="project-tags" aria-label="Tecnologías del proyecto">
-              <li>JavaScript ES6+</li>
-              <li>HTML5 y CSS3</li>
-              <li>Bootstrap 5.3.3</li>
-              <li>DOM y módulos ES6</li>
+    <!-- Proyectos: actualiza aquí títulos, descripciones, tecnologías y enlaces. -->
+    <section id="proyectos" class="projects section-shell section-pad">
+      <div class="section-heading split-heading reveal">
+        <div>
+          <p class="section-index">02 / SELECTED WORK</p>
+          <h2 class="decode" data-text="PROJECTS">PROJECTS</h2>
+        </div>
+        <p class="heading-aside">UNA SELECCIÓN DE SISTEMAS<br>CONSTRUIDOS DESDE CERO.</p>
+      </div>
+      <div class="project-grid">
+        <article class="project-card project-featured reveal">
+          <div class="project-image image-one"><span class="image-mark">NUEVO<br>TRELLO</span><span
+              class="image-grid"></span></div>
+          <div class="project-content">
+            <div class="project-top"><span class="project-number">01 — 2026</span><span class="project-state">IN
+                DEVELOPMENT</span></div>
+            <h3>PLANEADOR</h3>
+            <p>Gestor de tareas modular para organizar equipos, responsables y fechas en un solo flujo de trabajo.</p>
+            <ul class="tags">
+              <li>JAVASCRIPT</li>
+              <li>HTML / CSS</li>
+              <li>BOOTSTRAP</li>
             </ul>
-
-            <!--
-              Botón al repositorio. Aunque el proyecto esté en desarrollo, el enlace
-              ya funciona. [EDITAR] Reemplaza la URL por la de tu repositorio.
-            -->
-            <p class="project-links">
-              <a href="https://kristianknt.github.io/NuevoTrello/" target="_blank" rel="noopener noreferrer">
-                Ver demo del proyecto
-                <span class="visually-hidden">(se abre en una pestaña nueva)</span>
-              </a>
-            </p>
-          </article>
-        </li>
-
-        <!--
-        ===== PLANTILLA PARA UN NUEVO PROYECTO (copia y pega) =====
-        <li>
-          <article class="project-card" aria-labelledby="proyecto-N-titulo">
-            <h3 id="proyecto-N-titulo">Nombre del proyecto</h3>
-            <p class="project-status">Estado: Completado</p>
-            <p class="project-description">Qué hace y qué problema resuelve.</p>
-            <ul class="project-tags" aria-label="Tecnologías usadas">
-              <li>Node.js</li>
-              <li>PostgreSQL</li>
+            <div class="project-links"><a href="https://kristianknt.github.io/NuevoTrello/" target="_blank"
+                rel="noopener">LIVE DEMO <span>↗</span></a><a href="https://github.com/KristianKnt" target="_blank"
+                rel="noopener">SOURCE <span>↗</span></a></div>
+          </div>
+        </article>
+        <article class="project-card reveal">
+          <div class="project-image image-two"><span class="image-mark small">API<br>CORE</span><span
+              class="scan-lines"></span></div>
+          <div class="project-content">
+            <div class="project-top"><span class="project-number">02 — CONCEPT</span><span
+                class="project-state orange">BUILDING</span></div>
+            <h3>API CORE</h3>
+            <p>Arquitectura REST para operaciones seguras, escalables y fáciles de mantener.</p>
+            <ul class="tags">
+              <li>JAVA</li>
+              <li>SPRING BOOT</li>
+              <li>POSTGRESQL</li>
             </ul>
-            <p class="project-links">
-              <a href="https://github.com/TU-USUARIO/NOMBRE-REPO">Ver código de Nombre del proyecto en GitHub</a>
-            </p>
-          </article>
-        </li>
-        ============================================================
-        -->
-
-      </ul>
+            <div class="project-links"><a href="#contacto">REQUEST ACCESS <span>↗</span></a></div>
+          </div>
+        </article>
+        <article class="project-card reveal">
+          <div class="project-image image-three"><span class="image-mark small">DATA<br>FLOW</span><span
+              class="data-bars"></span></div>
+          <div class="project-content">
+            <div class="project-top"><span class="project-number">03 — CONCEPT</span><span
+                class="project-state">RESEARCH</span></div>
+            <h3>DATA FLOW</h3>
+            <p>Exploración visual de datos y automatizaciones para convertir información en decisiones.</p>
+            <ul class="tags">
+              <li>PYTHON</li>
+              <li>SQL</li>
+              <li>ODOO</li>
+            </ul>
+            <div class="project-links"><a href="#contacto">REQUEST ACCESS <span>↗</span></a></div>
+          </div>
+        </article>
+      </div>
     </section>
-
+    <!-- Stack tecnológico: añade o elimina tarjetas según tus herramientas reales. -->
+    <section id="habilidades" class="skills-section section-shell section-pad">
+      <div class="section-heading reveal">
+        <p class="section-index">03 / THE STACK</p>
+        <h2 class="decode" data-text="TOOLS OF THE TRADE">TOOLS OF THE TRADE</h2>
+      </div>
+      <div class="stack-grid reveal">
+        <div class="stack-item"><span class="stack-icon">&lt;/&gt;</span><strong>JAVASCRIPT</strong><small>LANGUAGE /
+            ES6+</small></div>
+        <div class="stack-item"><span class="stack-icon">Py</span><strong>PYTHON</strong><small>LANGUAGE /
+            AUTOMATION</small></div>
+        <div class="stack-item"><span class="stack-icon">☕</span><strong>JAVA</strong><small>LANGUAGE / OOP</small>
+        </div>
+        <div class="stack-item"><span class="stack-icon">S</span><strong>SPRING BOOT</strong><small>FRAMEWORK /
+            API</small></div>
+        <div class="stack-item"><span class="stack-icon">◈</span><strong>POSTGRESQL</strong><small>DATABASE /
+            SQL</small></div>
+        <div class="stack-item"><span class="stack-icon">◉</span><strong>GIT</strong><small>VERSION CONTROL</small>
+        </div>
+      </div>
+    </section>
+    <!-- Transmisión: conecta el formulario a tu backend o servicio de formularios. -->
+    <section id="contacto" class="contact section-shell section-pad">
+      <div class="contact-copy reveal">
+        <p class="section-index">04 / TRANSMISSION</p>
+        <h2 class="decode" data-text="LET'S CONNECT">LET'S CONNECT</h2>
+        <p>¿Tienes una idea, una oportunidad o simplemente quieres hablar de tecnología? Abre un canal seguro.</p>
+        <div class="contact-terminal"><span>CHANNEL_STATUS:</span> <b>AWAITING INPUT_</b></div>
+      </div>
+      <form class="contact-form glass-panel reveal" id="contact-form"><label>IDENTIFIER<input type="text" name="name"
+            placeholder="Tu nombre" required><span></span></label><label>RETURN ADDRESS<input type="email" name="email"
+            placeholder="tu@email.com" required><span></span></label><label>MESSAGE<textarea name="message" rows="3"
+            placeholder="Escribe tu transmisión..." required></textarea><span></span></label><button
+          class="button button-orange" type="submit"><span>SEND TRANSMISSION</span><b>↗</b></button>
+        <p class="form-feedback" role="status"></p>
+      </form>
+    </section>
   </main>
-
-  <!-- ============================================================
-       PIE DE PÁGINA: contacto
-       ============================================================ -->
-  <footer id="contacto" class="site-footer">
-    <h2 id="titulo-contacto">Contacto</h2>
-    <p class="contact-intro">¿Te interesa conocer mi trabajo o conversar sobre una oportunidad junior? Puedes escribirme o visitar mis perfiles.</p>
-
-    <nav aria-labelledby="titulo-contacto">
-      <ul class="contact-links">
-        <!--
-          Los enlaces externos abren en pestaña nueva con rel="noopener noreferrer"
-          (seguridad). El texto visible avisa del comportamiento (WCAG 3.2.5).
-          
-        -->
-        <li>
-          <a href="https://github.com/KristianKnt" target="_blank" rel="noopener noreferrer">
-            GitHub <span class="visually-hidden">(se abre en una pestaña nueva)</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/cristian-rojas-1b5a5a92/" target="_blank" rel="noopener noreferrer">
-            LinkedIn <span class="visually-hidden">(se abre en una pestaña nueva)</span>
-          </a>
-        </li>
-        <li>
-          <a href="mailto:cristian.rojascapera5@gmail.com">Correo electrónico</a>
-        </li>
-      </ul>
-    </nav>
-
-    <p class="copyright">&copy; 2026 Cristian Camilo Rojas Capera</p>
-  </footer>
-
+  <footer class="footer section-shell"><span>CR // 2026</span><span>BUILT WITH LOGIC &amp; LIGHT</span><a
+      href="#inicio">RETURN TO TOP ↑</a></footer>
+  <script src="script.js"></script>
 </body>
+
 </html>
